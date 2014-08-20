@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pipes4NET", "Pipes4NET\Pipes4NET.csproj", "{9C9A0590-2A3F-401F-9E3B-EB999877AD34}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pipes4NET.Tests", "Pipes4NET.Tests\Pipes4NET.Tests.csproj", "{821F9A31-EA47-480E-A3E4-3109E77AED6D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{9C9A0590-2A3F-401F-9E3B-EB999877AD34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C9A0590-2A3F-401F-9E3B-EB999877AD34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C9A0590-2A3F-401F-9E3B-EB999877AD34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{821F9A31-EA47-480E-A3E4-3109E77AED6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{821F9A31-EA47-480E-A3E4-3109E77AED6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{821F9A31-EA47-480E-A3E4-3109E77AED6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{821F9A31-EA47-480E-A3E4-3109E77AED6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
