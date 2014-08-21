@@ -24,7 +24,7 @@ namespace Pipes4NET.Tests {
 
             // Assert that the mapper function is hit
             // only once per item for the spy
-            var allItemsHitOnce = spy.HitCount.All(kvp => kvp.Value == 1);
+            var allItemsHitOnce = spy.MapperHitCount.All(kvp => kvp.Value == 1);
 
             Assert.IsTrue(allItemsHitOnce);
         }
@@ -43,25 +43,39 @@ namespace Pipes4NET.Tests {
 
             // Assert
             // The mapper function should not be called at all
-            Assert.AreEqual(0, spy.HitCount.Count);
+            Assert.AreEqual(0, spy.MapperHitCount.Count);
         }
 
         [TestMethod]
-        public void Pipe_ShouldReturnLazyExpression_WhichToListCanExecute() {
+        public void Pipe_ShouldReturnIEnumerable() {
             // Setup
             var items = Enumerable.Range(0, 10);
             var spy = new SpyExecutable<int>();
 
             // Act
-            // Build the pipe-expression but do not execute it
-            items
-                .Pipe(spy)
-                .Pipe(new IdentityExecutable<int>())
-                .ToList();
+            var res =
+                items
+                    .Pipe(spy)
+                    .Pipe(new IdentityExecutable<int>());
 
             // Assert
-            // The mapper function should not be called at all
-            Assert.AreEqual(10, spy.HitCount.Count);
+            Assert.IsInstanceOfType(res, typeof(IEnumerable<int>));
+        }
+
+        [TestMethod]
+        public void Pipe_ShouldReturnIExecutable() {
+            // Setup
+            var items = Enumerable.Range(0, 10);
+            var spy = new SpyExecutable<int>();
+
+            // Act
+            var res =
+                items
+                    .Pipe(spy)
+                    .Pipe(new IdentityExecutable<int>());
+
+            // Assert
+            Assert.IsInstanceOfType(res, typeof(IExecutable<int>));
         }
     }
 }
