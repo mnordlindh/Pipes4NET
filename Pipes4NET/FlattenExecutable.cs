@@ -39,8 +39,7 @@ namespace Pipes4NET {
             item = _currentInnerEnumerator.Current;
 
             // cache it
-            if (isCached)
-                _cache[index] = item;
+            _cache[index] = item;
 
             return true;
         }
