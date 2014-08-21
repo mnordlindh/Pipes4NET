@@ -16,6 +16,10 @@ namespace Pipes4NET {
 
         // Caching
         public override bool GetItem(int index, out TOutput item) {
+            if (!this.hasInput) {
+                throw new InvalidOperationException("This pipeline has no source!");
+            }
+
             bool isCached = _cache.ContainsKey(index);
 
             if (isCached) {

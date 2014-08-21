@@ -77,5 +77,25 @@ namespace Pipes4NET.Tests {
             // Assert
             Assert.IsInstanceOfType(res, typeof(IExecutable<int>));
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void Pipe_IntoExecutableAlreadyWithInput_ShouldThrow() {
+            // Setup
+            var resWithInput = Enumerable.Range(0, 10).Pipe(new IdentityExecutable<int>());
+
+            // Act
+            Enumerable.Range(10, 20).Pipe(resWithInput);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void Enumerating_WithoutSource_ShouldThrow() {
+            // Setup
+            var resWithoutInput = new IdentityExecutable<int>();
+
+            // Act
+            resWithoutInput.ToList();
+        }
     }
 }
