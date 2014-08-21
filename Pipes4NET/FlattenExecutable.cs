@@ -12,44 +12,37 @@ namespace Pipes4NET {
             return new ExecutableEnumerator<IEnumerable<TInput>, TInput>(this);
         }
 
+
         public override bool GetItem(int index, out TInput item) {
             bool isCached = _cache.ContainsKey(index);
 
+            // if we have a cached value for this index just return it
             if (isCached) {
                 item = _cache[index];
-            } else {
-                bool first = _currentInnerEnumerator == null;
-                if (first || !(isCached = _currentInnerEnumerator.MoveNext())) {
-                    // proceed to next inner enumerator
-                    isCached = _inputEnumerator.MoveNext();
-
-                    if (_inputEnumerator.Current == null) {
-                        _currentInnerEnumerator = null;
-                    } else if (isCached) {
-                        _currentInnerEnumerator = _inputEnumerator.Current.GetEnumerator();
-                    }
-                }
-
-                // take a step in the inner enumerator if we were at the first one AND
-                // that we have an enumerator (we do not when the current item is a null value).
-                if (first && _currentInnerEnumerator != null)
-                    isCached = _currentInnerEnumerator.MoveNext();
-
-                // get the item
-                if (_currentInnerEnumerator != null) {
-                    item = _currentInnerEnumerator.Current;
-                } else {
-                    item = default(TInput);
-                }
-
-                // cache it
-                if (isCached)
-                    _cache[index] = item;
-
-                return isCached;
+                return true;
             }
 
-            return isCached;
+            while (_currentInnerEnumerator == null || !_currentInnerEnumerator.MoveNext()) {
+                // either we do not have a iterator or its out of items
+                // move to the next source in the input
+                if (!_inputEnumerator.MoveNext()) {
+                    // no more sources
+                    item = default(TInput);
+                    return false;
+                }
+
+                // get the next enumerator
+                _currentInnerEnumerator = _inputEnumerator.Current.GetEnumerator();
+            }
+
+            // here we have an enumerator and it has been moved into the right position
+            item = _currentInnerEnumerator.Current;
+
+            // cache it
+            if (isCached)
+                _cache[index] = item;
+
+            return true;
         }
     }
 }

@@ -50,6 +50,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="SpyExecutable.cs" />
+    <Compile Include="ExecutableSpec.cs" />
     <Compile Include="FlattenExecutableSpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
