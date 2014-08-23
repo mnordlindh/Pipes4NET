@@ -11,13 +11,11 @@ namespace Pipes4NET.Tests {
             // Setup
             var items = Enumerable.Range(0, 10);
             var spy = new SpyExecutable<int>();
-
-            // Act
             var expr =
                 items
                     .Pipe(spy)
                     .Pipe(new IdentityExecutable<int>());
-
+            // Act
             // execute the enumerator twice
             expr.ToList();
             expr.ToList();

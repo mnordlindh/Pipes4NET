@@ -57,7 +57,7 @@ namespace Pipes4NET {
         }
 
         // Caching
-        public abstract bool GetItem(int index, out TOutput item);
+        public abstract bool TryGetItem(int index, out TOutput item);
 
     }
 }

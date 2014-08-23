@@ -15,7 +15,7 @@ namespace Pipes4NET {
         }
 
         // Caching
-        public override bool GetItem(int index, out TOutput item) {
+        public override bool TryGetItem(int index, out TOutput item) {
             if (!this.hasInput) {
                 throw new InvalidOperationException("This pipeline has no source!");
             }
@@ -73,7 +73,7 @@ namespace Pipes4NET {
             _index++;
 
             // ask the executable for a cached item or the next item from source
-            return _current.GetItem(_index, out _currentItem);
+            return _current.TryGetItem(_index, out _currentItem);
         }
 
         public virtual void Reset() {

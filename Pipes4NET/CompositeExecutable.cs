@@ -39,7 +39,7 @@ namespace Pipes4NET {
             }
         }
 
-        public override bool GetItem(int index, out object[] item) {
+        public override bool TryGetItem(int index, out object[] item) {
             bool isCached = _cache.ContainsKey(index);
             item = new object[_executablesEnumerators.Length];
 

@@ -13,7 +13,7 @@ namespace Pipes4NET {
         }
 
 
-        public override bool GetItem(int index, out TInput item) {
+        public override bool TryGetItem(int index, out TInput item) {
             bool isCached = _cache.ContainsKey(index);
 
             // if we have a cached value for this index just return it
