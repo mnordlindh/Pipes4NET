@@ -54,6 +54,7 @@
     <Compile Include="ExecutableSpec.cs" />
     <Compile Include="FlattenExecutableSpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="IdentityExecutableSpec.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pipes4NET\Pipes4NET.csproj">
