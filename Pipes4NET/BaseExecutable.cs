@@ -50,7 +50,20 @@ namespace Pipes4NET {
             }
         }
 
-        public abstract IEnumerator<TOutput> GetEnumerator();
+        //public abstract IEnumerator<TOutput> GetEnumerator();
+
+        public IEnumerator<TOutput> GetEnumerator() {
+            int index = -1;
+            TOutput item;
+            while (true) {
+                ++index;
+                if (TryGetItem(index, out item)) {
+                    yield return item;
+                } else {
+                    yield break;
+                }
+            }
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() {
             return GetEnumerator();
@@ -73,5 +86,6 @@ namespace Pipes4NET {
         }
 
         public abstract bool TryGetItem(int index, out TOutput item);
+
     }
 }

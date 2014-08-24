@@ -8,9 +8,9 @@ namespace Pipes4NET {
 
         private IEnumerator<TInput> _currentInnerEnumerator;
 
-        public override IEnumerator<TInput> GetEnumerator() {
-            return new ExecutableEnumerator<IEnumerable<TInput>, TInput>(this);
-        }
+        //public override IEnumerator<TInput> GetEnumerator() {
+        //    return new ExecutableEnumerator<IEnumerable<TInput>, TInput>(this);
+        //}
 
         public override bool TryGetItem(int index, out TInput item) {
             if (!this.hasInput) {

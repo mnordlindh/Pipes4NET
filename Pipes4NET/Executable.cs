@@ -10,19 +10,9 @@ namespace Pipes4NET {
     public abstract class Executable<TInput, TOutput> : BaseExecutable<TInput, TOutput> {
         public abstract TOutput Mapper(TInput input);
 
-        public override IEnumerator<TOutput> GetEnumerator() {
-            //int index = -1;
-            //TOutput item;
-            //while (true) {
-            //    ++index;
-            //    if (TryGetItem(index, out item)) {
-            //        yield return item;
-            //    } else {
-            //        yield break;
-            //    }
-            //}
-            return new ExecutableEnumerator<TInput, TOutput>(this);
-        }
+        //public override IEnumerator<TOutput> GetEnumerator() {
+        //    return new ExecutableEnumerator<TInput, TOutput>(this);
+        //}
 
         // Caching
         public override bool TryGetItem(int index, out TOutput item) {
@@ -54,40 +44,40 @@ namespace Pipes4NET {
         }
     }
 
-    public class ExecutableEnumerator<TInput, TOutput> : IEnumerator<TOutput> {
+    //public class ExecutableEnumerator<TInput, TOutput> : IEnumerator<TOutput> {
 
-        protected BaseExecutable<TInput, TOutput> _current;
-        protected int _index;
-        protected TOutput _currentItem;
+    //    protected BaseExecutable<TInput, TOutput> _current;
+    //    protected int _index;
+    //    protected TOutput _currentItem;
 
-        public ExecutableEnumerator(BaseExecutable<TInput, TOutput> current) {
-            _current = current;
-            _index = -1;
-            _currentItem = default(TOutput);
-        }
+    //    public ExecutableEnumerator(BaseExecutable<TInput, TOutput> current) {
+    //        _current = current;
+    //        _index = -1;
+    //        _currentItem = default(TOutput);
+    //    }
 
-        public virtual TOutput Current {
-            get { return _currentItem; }
-        }
+    //    public virtual TOutput Current {
+    //        get { return _currentItem; }
+    //    }
 
-        public void Dispose() {
+    //    public void Dispose() {
 
-        }
+    //    }
 
-        object System.Collections.IEnumerator.Current {
-            get { return Current; }
-        }
+    //    object System.Collections.IEnumerator.Current {
+    //        get { return Current; }
+    //    }
 
-        public virtual bool MoveNext() {
-            // move the cursor forward
-            _index++;
+    //    public virtual bool MoveNext() {
+    //        // move the cursor forward
+    //        _index++;
 
-            // ask the executable for a cached item or the next item from source
-            return _current.TryGetItem(_index, out _currentItem);
-        }
+    //        // ask the executable for a cached item or the next item from source
+    //        return _current.TryGetItem(_index, out _currentItem);
+    //    }
 
-        public virtual void Reset() {
-            _index = -1;
-        }
-    }
+    //    public virtual void Reset() {
+    //        _index = -1;
+    //    }
+    //}
 }

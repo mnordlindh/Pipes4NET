@@ -63,9 +63,9 @@ namespace Pipes4NET {
             return isCached;
         }
 
-        public new System.Collections.IEnumerator GetEnumerator() {
-            return new ExecutableEnumerator<T, object[]>(this);
-        }
+        //public new System.Collections.IEnumerator GetEnumerator() {
+        //    return new ExecutableEnumerator<T, object[]>(this);
+        //}
     }
 
     //public class CompositeExecutableEnumerator<T> : IEnumerator<object[]> {
