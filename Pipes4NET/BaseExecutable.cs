@@ -57,7 +57,21 @@ namespace Pipes4NET {
         }
 
         // Caching
-        public abstract bool TryGetItem(int index, out TOutput item);
 
+        public virtual void SetCacheItem(int index, TOutput item) {
+            _cache[index] = item;
+        }
+
+        public virtual bool TryGetCacheItem(int index, out TOutput item) {
+            if (_cache.ContainsKey(index)) {
+                item = _cache[index];
+                return true;
+            } else {
+                item = default(TOutput);
+                return false;
+            }
+        }
+
+        public abstract bool TryGetItem(int index, out TOutput item);
     }
 }

@@ -11,6 +11,16 @@ namespace Pipes4NET {
         public abstract TOutput Mapper(TInput input);
 
         public override IEnumerator<TOutput> GetEnumerator() {
+            //int index = -1;
+            //TOutput item;
+            //while (true) {
+            //    ++index;
+            //    if (TryGetItem(index, out item)) {
+            //        yield return item;
+            //    } else {
+            //        yield break;
+            //    }
+            //}
             return new ExecutableEnumerator<TInput, TOutput>(this);
         }
 
@@ -20,28 +30,28 @@ namespace Pipes4NET {
                 throw new InvalidOperationException("This pipeline has no source!");
             }
 
-            bool isCached = _cache.ContainsKey(index);
-
-            if (isCached) {
-                item = _cache[index];
-            } else {
-                // ask the input enumerator for a new item
-                isCached = _inputEnumerator.MoveNext();
-
-                if (isCached) {
-                    // we have a new item from source, send it to the mapper function
-                    item = this.Mapper(_inputEnumerator.Current);
-                    // cache it
-                    _cache[index] = item;
-                } else {
-                    // we do not have any cached items nor any from source
-                    item = default(TOutput);
-                }
+            if (this.TryGetCacheItem(index, out item)) {
+                return true;
             }
 
-            return isCached;
+            bool hasMoreItems;
+            if (hasMoreItems = this.MoveNext()) {
+                // we have a new item from source, send it to the mapper function
+                item = this.Mapper(_inputEnumerator.Current);
+                // cache it
+                this.SetCacheItem(index, item);
+            } else {
+                // we do not have any cached items nor any from source
+                item = default(TOutput);
+            }
+
+            return hasMoreItems;
         }
 
+        protected bool MoveNext() {
+            // ask the input enumerator for a new item
+            return _inputEnumerator.MoveNext();
+        }
     }
 
     public class ExecutableEnumerator<TInput, TOutput> : IEnumerator<TOutput> {
