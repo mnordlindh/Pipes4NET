@@ -26,8 +26,10 @@ namespace Pipes4NET {
         }
 
         public override void SetInput(IEnumerable input) {
-            _input = input;
-            IEnumerator _inputEnumerator = input.GetEnumerator();
+            //_input = input;
+            //IEnumerator _inputEnumerator = input.GetEnumerator();
+
+            base.SetInput(input);
 
             for (int i = 0; i < _executables.Length; i++) {
                 //Type type = _executables[i].GetType();
@@ -40,27 +42,32 @@ namespace Pipes4NET {
         }
 
         public override bool TryGetItem(int index, out object[] item) {
-            bool isCached = _cache.ContainsKey(index);
+
+            if (!this.hasInput) {
+                throw new InvalidOperationException("This pipeline has no source!");
+            }
+
+            if (this.TryGetCacheItem(index, out item)) {
+                return true;
+            }
+
             item = new object[_executablesEnumerators.Length];
+            bool hasMoreItems = false;
 
-            if (isCached) {
-                item = _cache[index];
-            } else {
-
-                // move all enumerators forward
-                for (int i = 0; i < _executablesEnumerators.Length; i++) {
-                    // we have new items from source, bundle them as an array
-                    if (isCached = _executablesEnumerators[i].MoveNext())
-                        item[i] = _executablesEnumerators[i].Current;
-                }
-
-                if (isCached) {
-                    // cache the item
-                    _cache[index] = item;
+            // move all enumerators forward
+            for (int i = 0; i < _executablesEnumerators.Length; i++) {
+                // we have new items from source, bundle them as an array
+                if (hasMoreItems = _executablesEnumerators[i].MoveNext()) {
+                    item[i] = _executablesEnumerators[i].Current;
                 }
             }
 
-            return isCached;
+            if (hasMoreItems) {
+                // cache the item
+                this.SetCacheItem(index, item);
+            }
+
+            return hasMoreItems;
         }
 
         //public new System.Collections.IEnumerator GetEnumerator() {

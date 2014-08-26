@@ -38,7 +38,7 @@ namespace Pipes4NET {
             return hasMoreItems;
         }
 
-        protected bool MoveNext() {
+        protected virtual bool MoveNext() {
             // ask the input enumerator for a new item
             return _inputEnumerator.MoveNext();
         }

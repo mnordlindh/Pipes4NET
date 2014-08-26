@@ -50,11 +50,13 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ParallelSpyExecutable.cs" />
     <Compile Include="SpyExecutable.cs" />
     <Compile Include="ExecutableSpec.cs" />
     <Compile Include="FlattenExecutableSpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IdentityExecutableSpec.cs" />
+    <Compile Include="ParallelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pipes4NET\Pipes4NET.csproj">
