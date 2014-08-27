@@ -9,7 +9,6 @@ namespace Pipes4NET {
         protected IExecutable<TInput> _input;
         protected IEnumerator<TInput> _inputEnumerator;
         protected IDictionary<int, TOutput> _cache;
-        protected bool _inputIsSet = false;
 
         protected bool hasInput {
             get { return _input != null || _inputEnumerator != null; }
@@ -50,8 +49,6 @@ namespace Pipes4NET {
             }
         }
 
-        //public abstract IEnumerator<TOutput> GetEnumerator();
-
         public IEnumerator<TOutput> GetEnumerator() {
             int index = -1;
             TOutput item;
@@ -70,7 +67,6 @@ namespace Pipes4NET {
         }
 
         // Caching
-
         public virtual void SetCacheItem(int index, TOutput item) {
             _cache[index] = item;
         }
@@ -86,6 +82,5 @@ namespace Pipes4NET {
         }
 
         public abstract bool TryGetItem(int index, out TOutput item);
-
     }
 }

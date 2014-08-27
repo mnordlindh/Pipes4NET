@@ -21,23 +21,13 @@ namespace Pipes4NET {
         }
 
         public override object[] Mapper(T input) {
-            // is this function used on composite-executables?
-            return null;
+            throw new NotImplementedException();
         }
 
-
         public override void SetInput(IEnumerable input) {
-            //_input = input;
-            //IEnumerator _inputEnumerator = input.GetEnumerator();
-
             base.SetInput(input);
 
             for (int i = 0; i < _executables.Length; i++) {
-                //Type type = _executables[i].GetType();
-                //MethodInfo method = type.GetMethod("SetInput");
-                //if (method != null) {
-                //    method.Invoke(_executables[i], new object[] { input });
-                //}
                 _executables[i].SetInput(input);
             }
         }
@@ -70,46 +60,5 @@ namespace Pipes4NET {
 
             return hasMoreItems;
         }
-
-        //public new System.Collections.IEnumerator GetEnumerator() {
-        //    return new ExecutableEnumerator<T, object[]>(this);
-        //}
     }
-
-    //public class CompositeExecutableEnumerator<T> : IEnumerator<object[]> {
-
-    //    private CompositeExecutable<T> _current;
-    //    private int _index;
-    //    private object[] _currentItem;
-
-    //    public CompositeExecutableEnumerator(CompositeExecutable<T> tasks) {
-    //        _current = tasks;
-    //        _index = -1;
-    //        _currentItem = null;
-    //    }
-
-    //    public object[] Current {
-    //        get { return _currentItem; }
-    //    }
-
-    //    public void Dispose() {
-
-    //    }
-
-    //    object System.Collections.IEnumerator.Current {
-    //        get { return Current; }
-    //    }
-
-    //    public bool MoveNext() {
-    //        // move the cursor forward
-    //        _index++;
-
-    //        // ask the executable for a cached item or the next item from source
-    //        return _current.GetItem(_index, out _currentItem);
-    //    }
-
-    //    public void Reset() {
-    //        _index = -1;
-    //    }
-    //}
 }

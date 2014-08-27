@@ -15,6 +15,7 @@ namespace Pipes4NET.Tests {
                 items
                     .Pipe(spy)
                     .Pipe(new IdentityExecutable<int>());
+
             // Act
             // execute the enumerator twice
             expr.ToList();

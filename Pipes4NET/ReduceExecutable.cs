@@ -5,7 +5,6 @@ using System.Text;
 
 namespace Pipes4NET {
     public abstract class ReduceExecutable<TInput, TOutput> : Executable<TInput, TOutput> {
-
         protected TOutput _memo;
         protected new TOutput _cache;
         protected bool _cacheSet = false;

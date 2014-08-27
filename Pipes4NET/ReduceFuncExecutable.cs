@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 namespace Pipes4NET {
 
     public class ReduceFuncExecutable<TIn, TOut> : ReduceExecutable<TIn, TOut> {
-
         Func<TOut, TIn, TOut> _mapper;
 
         public ReduceFuncExecutable(TOut init, Func<TOut, TIn, TOut> mapper)
