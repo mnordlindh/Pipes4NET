@@ -106,7 +106,7 @@ namespace Pipes4NET.Tests {
 
             // Assert that the mapper function is hit
             // only once per item for the spy
-            var allItemsHitOnce = spy.GetItemHitCount.All(kvp => kvp.Value == 1);
+            var allItemsHitOnce = spy.MapperHitCount.All(kvp => kvp.Value == 1);
 
             Assert.IsTrue(allItemsHitOnce);
             Assert.AreEqual(16, res.Count());
