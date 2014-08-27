@@ -44,9 +44,7 @@ namespace Pipes4NET {
         }
 
         public IEnumerable<TOutput> Exec() {
-            foreach (var item in this) {
-                yield return item;
-            }
+            return this.ToList();
         }
 
         public IEnumerator<TOutput> GetEnumerator() {
