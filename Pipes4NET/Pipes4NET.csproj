@@ -33,6 +33,13 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework">
+      <HintPath>..\Assemblies\NUnit\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpCompress, Version=0.10.3.0, Culture=neutral, PublicKeyToken=beaf6f427e128133, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Assemblies\IO\SharpCompress.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,14 +52,29 @@
     <Compile Include="BaseExecutable.cs" />
     <Compile Include="CompositeExecutable.cs" />
     <Compile Include="Executable.cs" />
+    <Compile Include="First.cs" />
     <Compile Include="FlattenExecutable.cs" />
     <Compile Include="IdentityExecutable.cs" />
     <Compile Include="IExecutable.cs" />
+    <Compile Include="IO\FindContainingFolder.cs" />
+    <Compile Include="IO\FindFiles.cs" />
+    <Compile Include="IO\Folders.cs" />
+    <Compile Include="IO\MiscIO.cs" />
+    <Compile Include="IO\Unzip.cs" />
+    <Compile Include="Last.cs" />
+    <Compile Include="MaxExecutable.cs" />
+    <Compile Include="Microsoft\MSBuildCompile.cs" />
+    <Compile Include="NUnit\FindType.cs" />
+    <Compile Include="NUnit\NUnitTestRunner.cs" />
+    <Compile Include="NUnit\TestInfo.cs" />
+    <Compile Include="NUnit\TestRunner.cs" />
+    <Compile Include="NUnit\TestRunResult.cs" />
     <Compile Include="PipeExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReduceExecutable.cs" />
     <Compile Include="ReduceFuncExecutable.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
