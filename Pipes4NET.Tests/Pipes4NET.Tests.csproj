@@ -50,6 +50,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="IO\FindFilesSpec.cs" />
     <Compile Include="SpyExecutable.cs" />
     <Compile Include="ExecutableSpec.cs" />
     <Compile Include="FlattenExecutableSpec.cs" />
