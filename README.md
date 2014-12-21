@@ -4,7 +4,7 @@ Pipes4NET
 ## Examples
 
 ### Run NUnit tests against a lot of zipped-projects 
-```
+```C#
 string pathToAssignments = Application.StartupPath + "/../../Files/";
 string pathToTestAssembly = Application.StartupPath + "/../../Assemblies/TestsAssembly.dll";
 Type typeToLookFor = typeof(InterfaceTypeToLookFor);
